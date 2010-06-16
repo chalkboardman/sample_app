@@ -20,6 +20,12 @@ class User < ActiveRecord::Base
   
   def has_password?(submitted_password)
     #Compare encrypted_password with encrypted version of submitted_password
+    encrypted_password == encrypt(submitted_password)
+  end
+  
+  def remember_me!
+    self.remember_token = encrypt("#{salt}--#{id}--#{Time.now.utc}")
+    save_without_validation
   end
   
   #class method
@@ -31,8 +37,10 @@ class User < ActiveRecord::Base
   
   private
     def encrypt_password
-      self.salt = make_salt
-      self.encrypted_password = encrypt(password)
+      unless password.nil?
+        self.salt = make_salt
+        self.encrypted_password = encrypt(password)
+      end
     end
     
     def encrypt(string)
