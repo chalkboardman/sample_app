@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password
   validates_length_of :password, :within => 6..40
   
-  before_save :encrypt_assword
+  before_save :encrypt_password
   
   def has_password?(submitted_password)
     #Compare encrypted_password with encrypted version of submitted_password
