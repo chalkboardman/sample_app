@@ -1,0 +1,7 @@
+Exception: STATUS_ACCESS_VIOLATION at eip=610C17E9
+eax=00000000 ebx=00000001 ecx=00000000 edx=00000704 esi=00000000 edi=186ACCC8
+ebp=186ACB04 esp=186ACADC program=C:\Ruby191\bin\ruby.exe, pid 360, thread unknown (0x17FC)
+cs=001B ds=0023 es=0023 fs=003B gs=0000 ss=0023
+Stack trace:
+Frame     Function  Args
+186ACB04  610C17E9  (00000000
