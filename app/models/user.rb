@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
   
+  has_many :microposts, :dependent => :destroy
+  
   EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates_presence_of :name, :email
@@ -26,6 +28,11 @@ class User < ActiveRecord::Base
   def remember_me!
     self.remember_token = encrypt("#{salt}--#{id}--#{Time.now.utc}")
     save_without_validation
+  end
+  
+  def feed
+    #This is preliminary. See Ch. 12 for full implementation
+    Micropost.all(:conditions => ["user_id = ?", id])
   end
   
   #class method
