@@ -30,6 +30,11 @@ class User < ActiveRecord::Base
     save_without_validation
   end
   
+  def feed
+    #This is preliminary. See Ch. 12 for full implementation
+    Micropost.all(:conditions => ["user_id = ?", id])
+  end
+  
   #class method
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
